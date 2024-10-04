@@ -4,8 +4,7 @@
   "main": "dist/app.js",
   "type": "module",
   "scripts": {
-    "dev": "node --loader=ts-node/esm --env-file=.env --watch src/app.ts",
-    "watch": "npx tsx watch src/app.ts",
+    "dev": "npx tsx watch src/app.ts",
     "build": "npx tsc && npx tsc-alias",
     "start": "node dist/app.js"
   },
