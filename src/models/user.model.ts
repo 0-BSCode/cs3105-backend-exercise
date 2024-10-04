@@ -1,5 +1,5 @@
-import { CreateUserDto } from "@dto/types/user/create-user.dto.ts"
-import { UserDto } from "@dto/types/user/user.dto.ts"
+import { CreateUserDto } from "@dto/types/user/create-user.dto"
+import { UserDto } from "@dto/types/user/user.dto"
 
 export type UserModel = {
     id: string
