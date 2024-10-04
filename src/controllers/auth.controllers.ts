@@ -18,21 +18,21 @@ export const loginController = (req: Request, res: Response) => {
 
     const isMatch = bcrypt.compareSync(password, user.password);
 
-    // if (!isMatch) {
-    //     throw new Error('Wrong password');
-    // }
+    if (!isMatch) {
+        throw new Error('Wrong password');
+    }
 
     const payload: JwtPayload = {
         id: user.id,
         name: user.name
     };
 
-
+    // TODO: Extract (DRY and don't use magic values)
     const token = jwt.sign(payload, process.env.JWT_SECRET!, {
-        expiresIn: '15s'
+        expiresIn: '5m'
     });
 
-    res.cookie('token', token, { httpOnly: true, secure: true, maxAge: 15 * 1000 });
+    res.cookie('token', token, { httpOnly: true, secure: true, maxAge: 5 * 60 * 1000 });
     
     res.status(200).json({ token });
 }
@@ -52,8 +52,6 @@ export const registerController = (req: Request, res: Response) => {
         password: bcrypt.hashSync(password, SALT_ROUNDS),
     }
 
-    console.log(dto);
-
     const newUser = createUser(dto);
 
     const payload: JwtPayload = {
@@ -62,10 +60,10 @@ export const registerController = (req: Request, res: Response) => {
     };
 
     const token = jwt.sign(payload, process.env.JWT_SECRET!, {
-        expiresIn: '15s'
+        expiresIn: '5m'
     });
 
-    res.cookie('token', token, { httpOnly: true, secure: true, maxAge: 15 * 1000 });
+    res.cookie('token', token, { httpOnly: true, secure: true, maxAge: 5 * 60 * 1000 });
 
     res.status(201).json(newUser);
 }

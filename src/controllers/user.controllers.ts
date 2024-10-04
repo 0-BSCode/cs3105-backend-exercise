@@ -6,6 +6,10 @@ import { ResponseDto } from "@dto/types/response/response.dto";
 export const fetchUserController = (req: Request, res: Response) => {
     const { id } = req.params;
 
+    if (req.userId && req.userId !== id) {
+        throw new Error('Unauthorized to fetch this profile');
+    }
+
     // USE CASE: Find user by ID
     const user = getUserById(id);
 
