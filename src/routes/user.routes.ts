@@ -30,7 +30,7 @@ export default userRoutes;
  *         description: A successful response
  *       400:
  *         description: Bad request
- *        401:
+ *       401:
  *         description: Unauthorized
  *       404:
  *         description: User not found
