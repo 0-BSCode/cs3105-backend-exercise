@@ -14,7 +14,7 @@ const jsDocOptions: Options = {
         },
         basePath: '/api',
     },
-    apis: [path.join(__dirname, '..', 'routes/*.ts')],
+    apis: [path.join(__dirname, '..', 'routes/*.{js,ts}')],
 };
 
 export const specs = swaggerJSDoc(jsDocOptions);
