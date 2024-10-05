@@ -1,3 +1,3 @@
 import { UserDto } from "./user.dto";
 
-export type CreateUserDto = Omit<UserDto, "id" | "createdAt" | "updatedAt">; 
+export type CreateUserDto = Omit<UserDto, "id" | "createdAt">; 

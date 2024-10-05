@@ -7,7 +7,6 @@ export type UserModel = {
     email: string
     password: string
     createdAt: Date
-    updatedAt: Date
 }
 
 export const userDb: UserModel[] = []
@@ -40,7 +39,6 @@ export const createUser = (dto: CreateUserDto): UserDto => {
         email: dto.email,
         password: dto.password,
         createdAt: new Date(),
-        updatedAt: new Date()
     }
 
     userDb.push(newRecord);
@@ -59,6 +57,5 @@ const convertToDto = (user: UserModel): UserDto => {
         email: user.email,
         password: user.password,
         createdAt: user.createdAt,
-        updatedAt: user.updatedAt
     }
 }

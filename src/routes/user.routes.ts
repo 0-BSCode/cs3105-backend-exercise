@@ -7,3 +7,24 @@ const userRoutes = Router();
 userRoutes.get('/:id', authenticateMiddleware, fetchUserController);
 
 export default userRoutes;
+
+/**
+ * @swagger
+ * tags:
+ *   name: Users
+ *   description: Users routes
+ * /api/users/{id}:
+ *   get:
+ *     tags: [Users]
+ *     summary: Fetches a user
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: User ID
+ *     responses:
+ *       200:
+ *         description: A successful response
+ */

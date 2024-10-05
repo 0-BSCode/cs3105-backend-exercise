@@ -12,7 +12,7 @@ export const fetchUserUseCase = (id: string, userId?: string): Pick<UserDto, 'id
         throw new Error('User not found');
     }
 
-    const {password, createdAt, updatedAt, ...result} = user;
+    const {password, createdAt, ...result} = user;
 
     return result;
 }

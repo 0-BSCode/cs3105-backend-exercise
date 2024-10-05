@@ -34,10 +34,10 @@ export const loginController = (req: Request, res: Response) => {
 }
 
 export const registerController = (req: Request, res: Response) => {
-    const { username, email, password, confirmPassword } = req.body;
+    const { name, email, password, confirmPassword } = req.body;
 
     const inputDto: RegisterInputDto = {
-        name: username,
+        name,
         email,
         password,
         confirmPassword
@@ -45,7 +45,7 @@ export const registerController = (req: Request, res: Response) => {
 
     registerDtoInputValidation(inputDto);
 
-    const token = registerUseCase(email, username, password);
+    const token = registerUseCase(email, name, password);
 
     res.cookie('token', token, { httpOnly: true, secure: true, maxAge: 5 * 60 * 1000 });
 
