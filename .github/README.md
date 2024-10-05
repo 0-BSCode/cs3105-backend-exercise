@@ -1,6 +1,8 @@
 
 # User Management API
 
+![](../screenshots/swagger.png)
+
 A simple user management API that allows the following operations:
 
 1. Register a user account
