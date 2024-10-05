@@ -1,10 +1,11 @@
 import { errorHandlerMiddleware } from "@middleware/error-handler.middleware";
 import express, { urlencoded, json } from "express";
 import cookieParser from 'cookie-parser';
-import { envConfig } from '@config/env';
+import { envConfig, checkEnv } from '@config/env';
 import { loggerMiddleware } from "@middleware/logger.middleware";
 import routes from "@routes/index";
 
+checkEnv();
 const app = express();
 
 app.use(urlencoded({ extended: true }));
@@ -28,6 +29,5 @@ app.listen(envConfig.PORT, () => {
 /**
  * TODO
  * 1. Rate limiting middleware
- * 2. Address TODO's
- * 3. Deploy site
+ * 2. Deploy site
  */
