@@ -1,17 +1,17 @@
 import Joi from "joi";
 
-export type LoginDto = {
+export type LoginInputDto = {
     email: string,
     password: string
 }
 
-export const loginDtoValidation = (dto: LoginDto) => {
-    const schema = Joi.object<LoginDto>({
+export const loginInputDtoValidation = (dto: LoginInputDto) => {
+    const schema = Joi.object<LoginInputDto>({
         email: Joi.string().required(),
         password: Joi.string().required()
     });
 
-    const result = schema.validate(dto);
+    const result = schema.validate(dto, { allowUnknown: false });
 
     if (result.error) {
         throw new Error(result.error.message);

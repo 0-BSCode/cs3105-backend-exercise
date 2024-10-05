@@ -2,16 +2,16 @@ import { Request, Response } from "express";
 import {getUserById, UserModel} from '@models/user.model';
 import { UserDto } from "@dto/types/user/user.dto";
 import { ResponseDto } from "@dto/types/response/response.dto";
-import { FetchUserDto, fetchUserDtoValidation } from "./dto/fetch-user.dto";
+import { FetchUserInputDto, fetchUserInputDtoValidation } from "./dto/fetch-user.dto";
 
 export const fetchUserController = (req: Request, res: Response) => {
     const { id } = req.params;
 
-    const inputDto: FetchUserDto = {
+    const inputDto: FetchUserInputDto = {
         id
     }
 
-    fetchUserDtoValidation(inputDto);
+    fetchUserInputDtoValidation(inputDto);
 
     if (req.userId && req.userId !== id) {
         throw new Error('Unauthorized to fetch this profile');

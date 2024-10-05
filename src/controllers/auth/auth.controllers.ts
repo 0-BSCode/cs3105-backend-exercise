@@ -4,20 +4,20 @@ import bcrypt from 'bcrypt';
 import { JwtPayload } from "@dto/types/jwt/jwt-payload.dto";
 import jwt from 'jsonwebtoken';
 import { CreateUserDto } from "@dto/types/user/create-user.dto";
-import { LoginDto, loginDtoValidation } from "./dto/login.dto";
-import { RegisterDto, registerDtoValidation } from "./dto/register.dto";
+import { LoginInputDto, loginInputDtoValidation } from "./dto/login.dto";
+import { RegisterInputDto, registerDtoInputValidation } from "./dto/register.dto";
 
 const SALT_ROUNDS = 10;
 
 export const loginController = (req: Request, res: Response) => {
     const { email, password } = req.body;
 
-    const inputDto: LoginDto = {
+    const inputDto: LoginInputDto = {
         email,
         password,
     };
 
-    loginDtoValidation(inputDto);
+    loginInputDtoValidation(inputDto);
 
     const user = getUserByEmail(email);
 
@@ -43,20 +43,20 @@ export const loginController = (req: Request, res: Response) => {
 
     res.cookie('token', token, { httpOnly: true, secure: true, maxAge: 5 * 60 * 1000 });
     
-    res.status(200).json({ token });
+    res.status(200).json({ message: 'Login successful' });
 }
 
 export const registerController = (req: Request, res: Response) => {
     const { username, email, password, confirmPassword } = req.body;
 
-    const inputDto: RegisterDto = {
+    const inputDto: RegisterInputDto = {
         name: username,
         email,
         password,
         confirmPassword
     }
 
-    registerDtoValidation(inputDto);
+    registerDtoInputValidation(inputDto);
 
     const user = getUserByEmail(email);
 
@@ -83,5 +83,5 @@ export const registerController = (req: Request, res: Response) => {
 
     res.cookie('token', token, { httpOnly: true, secure: true, maxAge: 5 * 60 * 1000 });
 
-    res.status(201).json(newUser);
+    res.status(201).json({ message: 'Registration successful' });
 }
