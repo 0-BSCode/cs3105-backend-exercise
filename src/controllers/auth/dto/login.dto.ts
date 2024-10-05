@@ -1,3 +1,5 @@
+import { ErrorCodesEnum } from "@dto/enums/error-codes.enum";
+import { ServerError } from "@dto/types/error/error.dto";
 import Joi from "joi";
 
 export type LoginInputDto = {
@@ -14,7 +16,7 @@ export const loginInputDtoValidation = (dto: LoginInputDto) => {
     const result = schema.validate(dto);
 
     if (result.error) {
-        throw new Error(result.error.message);
+        throw new ServerError(ErrorCodesEnum.BAD_REQUEST, result.error.message);
     }
 
     return result.value;

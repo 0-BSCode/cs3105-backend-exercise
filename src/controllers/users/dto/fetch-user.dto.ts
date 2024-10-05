@@ -1,3 +1,5 @@
+import { ErrorCodesEnum } from "@dto/enums/error-codes.enum";
+import { ServerError } from "@dto/types/error/error.dto";
 import { UserDto } from "@dto/types/user/user.dto";
 import Joi from "joi"
 
@@ -15,7 +17,7 @@ export const fetchUserInputDtoValidation = (dto: FetchUserInputDto) => {
     const result = schema.validate(dto);
 
     if (result.error) {
-        throw new Error(result.error.message);
+        throw new ServerError(ErrorCodesEnum.BAD_REQUEST, result.error.message);
     }
 
     return result.value;

@@ -3,18 +3,20 @@ import { JwtPayload } from "@dto/types/jwt/jwt-payload.dto";
 import { CreateUserDto } from "@dto/types/user/create-user.dto";
 import { signJwt } from "@utils/jwt.utils";
 import { compareSyncBcrypt, hashSyncBcrypt } from "@utils/bcrypt.utils";
+import { ServerError } from "@dto/types/error/error.dto";
+import { ErrorCodesEnum } from "@dto/enums/error-codes.enum";
 
 export const loginUseCase = (email: string, password: string): string => {
     const user = getUserByEmail(email);
 
     if (!user) {
-        throw new Error(`User with email "${email}" not found`);
+        throw new ServerError(ErrorCodesEnum.NOT_FOUND, `User with email "${email}" not found`);
     }
 
     const isMatch = compareSyncBcrypt(password, user.password);
 
     if (!isMatch) {
-        throw new Error('Incorrect password');
+        throw new ServerError(ErrorCodesEnum.BAD_REQUEST, 'Incorrect password');
     }
 
     const payload: JwtPayload = {
@@ -31,7 +33,7 @@ export const registerUseCase = (email: string, name: string, password: string): 
     const user = getUserByEmail(email);
 
     if (user) {
-        throw new Error('User with email already exists');
+        throw new ServerError(ErrorCodesEnum.BAD_REQUEST, 'User with email already exists');
     }
 
     const createUserDto: CreateUserDto = {

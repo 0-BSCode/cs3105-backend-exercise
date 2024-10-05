@@ -1,3 +1,5 @@
+import { ErrorCodesEnum } from "@dto/enums/error-codes.enum"
+import { ServerError } from "@dto/types/error/error.dto"
 import rateLimit from "express-rate-limit"
 
 export const rateLimiterMiddleware = rateLimit({
@@ -6,6 +8,6 @@ export const rateLimiterMiddleware = rateLimit({
     standardHeaders: true,
     legacyHeaders: false,
     handler: (req, res) => {
-        res.status(429).json({message: "Too many requests"})
+        throw new ServerError(ErrorCodesEnum.TOO_MANY_REQUESTS, "Too many requests")
     }
 })

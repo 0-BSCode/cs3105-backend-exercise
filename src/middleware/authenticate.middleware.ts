@@ -1,4 +1,6 @@
 import { envConfig } from "@config/env.config";
+import { ErrorCodesEnum } from "@dto/enums/error-codes.enum";
+import { ServerError } from "@dto/types/error/error.dto";
 import { JwtPayload } from "@dto/types/jwt/jwt-payload.dto";
 import { verifyJwt } from "@utils/jwt.utils";
 import { NextFunction, Request, Response } from "express";
@@ -7,7 +9,7 @@ export const authenticateMiddleware = (req: Request, res: Response, next: NextFu
     const token = req.cookies[envConfig.COOKIE_NAME];
     
     if (!token) {
-        throw new Error("No token provided");
+        throw new ServerError(ErrorCodesEnum.UNAUTHORIZED, "No token provided");
     }
 
     try {
@@ -17,9 +19,9 @@ export const authenticateMiddleware = (req: Request, res: Response, next: NextFu
         next();
     } catch (e) {
         if (e instanceof Error) {
-            throw new Error(e.message);
+            throw new ServerError(ErrorCodesEnum.UNAUTHORIZED, e.message);
         }
 
-        throw new Error("Unauthorized");
+        throw new ServerError(ErrorCodesEnum.INTERNAL_SERVER_ERROR, "Server error");
     }
 }
