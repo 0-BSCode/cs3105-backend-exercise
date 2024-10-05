@@ -6,6 +6,8 @@ import jwt from 'jsonwebtoken';
 import { CreateUserDto } from "@dto/types/user/create-user.dto";
 import { LoginInputDto, loginInputDtoValidation } from "./dto/login.dto";
 import { RegisterInputDto, registerDtoInputValidation } from "./dto/register.dto";
+import { loginUseCase, registerUseCase } from "@use-cases/auth.use-cases";
+import { ResponseDto } from "@dto/types/response/response.dto";
 
 const SALT_ROUNDS = 10;
 
@@ -19,31 +21,16 @@ export const loginController = (req: Request, res: Response) => {
 
     loginInputDtoValidation(inputDto);
 
-    const user = getUserByEmail(email);
-
-    if (!user) {
-        throw new Error(`User with email "${email}" not found`);
-    }
-
-    const isMatch = bcrypt.compareSync(password, user.password);
-
-    if (!isMatch) {
-        throw new Error('Incorrect password');
-    }
-
-    const payload: JwtPayload = {
-        id: user.id,
-        name: user.name
-    };
-
-    // TODO: Extract (DRY and don't use magic values)
-    const token = jwt.sign(payload, process.env.JWT_SECRET!, {
-        expiresIn: '5m'
-    });
+    const token = loginUseCase(email, password);
 
     res.cookie('token', token, { httpOnly: true, secure: true, maxAge: 5 * 60 * 1000 });
     
-    res.status(200).json({ message: 'Login successful' });
+    const response: ResponseDto<string> = {
+        status: 200,
+        payload: "Login successful"
+    }
+
+    res.status(response.status).json(response);
 }
 
 export const registerController = (req: Request, res: Response) => {
@@ -58,30 +45,14 @@ export const registerController = (req: Request, res: Response) => {
 
     registerDtoInputValidation(inputDto);
 
-    const user = getUserByEmail(email);
-
-    if (user) {
-        throw new Error('User with email already exists');
-    }
-
-    const createUserDto: CreateUserDto = {
-        email,
-        name: username,
-        password: bcrypt.hashSync(password, SALT_ROUNDS),
-    }
-
-    const newUser = createUser(createUserDto);
-
-    const payload: JwtPayload = {
-        id: newUser.id,
-        name: newUser.name
-    };
-
-    const token = jwt.sign(payload, process.env.JWT_SECRET!, {
-        expiresIn: '5m'
-    });
+    const token = registerUseCase(email, username, password);
 
     res.cookie('token', token, { httpOnly: true, secure: true, maxAge: 5 * 60 * 1000 });
 
-    res.status(201).json({ message: 'Registration successful' });
+    const response: ResponseDto<string> = {
+        status: 201,
+        payload: "Registration successful"
+    }
+
+    res.status(response.status).json(response);
 }
