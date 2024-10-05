@@ -11,18 +11,18 @@ A simple user management API that allows the following operations:
 
 ## Installation
 
-Clone the project
+1. Clone the project
 
 ```bash
   git clone "https://github.com/0-BSCode/cs3105-backend-exercise"
 ```
 
-Install dependencies
+2. Install dependencies
 ```bash
   npm ci
 ```
 
-Set up environment variables in the `.env` file
+3. Set up environment variables in the `.env` file
 | **Variable**         | **Description**                                                                                             |
 |----------------------|-------------------------------------------------------------------------------------------------------------|
 | PORT                 | Port that the express app will run on (e.g. `5000`) |
@@ -33,3 +33,15 @@ Set up environment variables in the `.env` file
 | COOKIE_NAME          | The name to give the cookies set (e.g. `cookie`)                                                            |
 | RATE_LIMIT_WINDOW_MS | The time frame (in milliseconds) where requests are checked for rate limiting (e.g. `15000`)                |
 | RATE_LIMIT_MAX       | The maximum number of requests allowed within the time frame specified by `RATE_LIMIT_WINDOW_MS` (e.g. `5`) |
+
+4. Run the app
+```bash
+  # Run develop build
+  npm run dev
+
+  # Run production build
+  npm run build
+  npm run start
+```
+
+5. Head to the `/docs` endpoint to play around using Swagger.
