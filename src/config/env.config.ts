@@ -10,6 +10,7 @@ export const envConfig = {
     COOKIE_MAX_AGE: process.env.COOKIE_MAX_AGE as string,
     RATE_LIMIT_WINDOW_MS: process.env.RATE_LIMIT_WINDOW_MS as string,
     RATE_LIMIT_MAX: process.env.RATE_LIMIT_MAX as string,
+    COOKIE_NAME: process.env.COOKIE_NAME as string
 }
 
 export const checkEnv = () => {
@@ -21,6 +22,7 @@ export const checkEnv = () => {
         COOKIE_MAX_AGE: Joi.string().required(),
         RATE_LIMIT_WINDOW_MS: Joi.string().required(),
         RATE_LIMIT_MAX: Joi.string().required(),
+        COOKIE_NAME: Joi.string().required()
     });
     const result = schema.validate(envConfig);
 
