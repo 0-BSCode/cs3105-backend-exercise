@@ -24,6 +24,7 @@ export default userRoutes;
  *           type: string
  *         required: true
  *         description: User ID
+ *         default: 0
  *     responses:
  *       200:
  *         description: A successful response
