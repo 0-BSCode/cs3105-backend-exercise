@@ -34,6 +34,12 @@ export default authRoutes;
  *     responses:
  *       200:
  *         description: A successful response
+ *       400:
+ *         description: Bad request
+ *       404:
+ *         description: User not found
+ *       500:
+ *         description: Internal server error
  * /api/auth/register:
  *   post:
  *     tags: [Auth]
@@ -60,4 +66,8 @@ export default authRoutes;
  *     responses:
  *       201:
  *         description: A successful response
+ *       400:
+ *         description: Bad request
+ *       500:
+ *         description: Internal server error
  */
