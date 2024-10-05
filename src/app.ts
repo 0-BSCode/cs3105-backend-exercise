@@ -2,6 +2,7 @@ import { errorHandlerMiddleware } from "@middleware/error-handler.middleware";
 import express, { urlencoded, json } from "express";
 import cookieParser from 'cookie-parser';
 import { envConfig } from '@config/env';
+import { loggerMiddleware } from "@middleware/logger.middleware";
 import routes from "@routes/index";
 
 const app = express();
@@ -9,6 +10,7 @@ const app = express();
 app.use(urlencoded({ extended: true }));
 app.use(json());
 app.use(cookieParser());
+app.use(loggerMiddleware);
 app.use("/api", routes);
 
 // Error handler
