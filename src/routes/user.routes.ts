@@ -1,4 +1,4 @@
-import { fetchUserController } from '@controllers/user.controllers';
+import { fetchUserController } from '@controllers/users/user.controllers';
 import { authenticateMiddleware } from '@middleware/authenticate.middleware';
 import {Router} from 'express';
 

@@ -17,10 +17,12 @@ export const fetchUserController = (req: Request, res: Response) => {
         throw new Error('User not found');
     }
 
-    const response: ResponseDto<UserDto> = {
+    const {password, createdAt, updatedAt, ...result} = user;
+
+    const response: ResponseDto<Pick<UserDto, 'id' | 'name' | 'email'>> = {
         status: 200,
-        payload: user
+        payload: result
     }
 
-    res.status(response.status).json(response.payload);
+    res.status(response.status).send(response);
 }
