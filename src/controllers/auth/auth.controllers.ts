@@ -1,4 +1,4 @@
-import { createUser, getUserByEmail, getUserByName } from "@models/user.model";
+import { createUser, getUserByEmail } from "@models/user.model";
 import { Request, Response } from "express";
 import bcrypt from 'bcrypt';
 import { JwtPayload } from "@dto/types/jwt/jwt-payload.dto";
@@ -10,25 +10,25 @@ import { RegisterDto, registerDtoValidation } from "./dto/register.dto";
 const SALT_ROUNDS = 10;
 
 export const loginController = (req: Request, res: Response) => {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
 
     const inputDto: LoginDto = {
-        username,
+        email,
         password,
     };
 
     loginDtoValidation(inputDto);
 
-    const user = getUserByName(username);
+    const user = getUserByEmail(email);
 
     if (!user) {
-        throw new Error('User not found');
+        throw new Error(`User with email "${email}" not found`);
     }
 
     const isMatch = bcrypt.compareSync(password, user.password);
 
     if (!isMatch) {
-        throw new Error('Wrong password');
+        throw new Error('Incorrect password');
     }
 
     const payload: JwtPayload = {

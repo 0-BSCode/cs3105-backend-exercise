@@ -1,13 +1,13 @@
 import Joi from "joi";
 
 export type LoginDto = {
-    username: string,
+    email: string,
     password: string
 }
 
 export const loginDtoValidation = (dto: LoginDto) => {
     const schema = Joi.object<LoginDto>({
-        username: Joi.string().required(),
+        email: Joi.string().required(),
         password: Joi.string().required()
     });
 

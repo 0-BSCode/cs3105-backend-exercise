@@ -23,16 +23,6 @@ export const getUserById = (id: string): UserDto | null => {
     return convertToDto(record);
 }
 
-export const getUserByName = (name: string): UserDto | null => {
-    const record = userDb.find(user => user.name === name);
-
-    if (!record) {
-        return null;
-    }   
-
-    return convertToDto(record);
-}
-
 export const getUserByEmail = (email: string): UserDto | null => {
     const record = userDb.find(user => user.email === email);
 
