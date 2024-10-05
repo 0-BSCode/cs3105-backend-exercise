@@ -27,3 +27,13 @@ app.get("/", (req, res) => {
 app.listen(port, () => {
   console.log(`Server is listening at port ${port}`);
 });
+
+/**
+ * TODO
+ * 1. Input validation w/ Joi
+ * 2. Rate limiting middleware
+ * 3. Logging middleware
+ * 4. Address TODO's
+ * 5. Deploy site
+ * 6. Make env file available in compiled JS
+ */

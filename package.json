@@ -1,12 +1,12 @@
 {
   "name": "backend-exercise",
   "version": "1.0.0",
-  "main": "dist/app.js",
+  "main": "dist/src/app.js",
   "type": "module",
   "scripts": {
     "dev": "npx tsx watch src/app.ts",
     "build": "npx tsc && npx tsc-alias",
-    "start": "node dist/app.js"
+    "start": "node dist/src/app.js"
   },
   "keywords": [],
   "author": "",
