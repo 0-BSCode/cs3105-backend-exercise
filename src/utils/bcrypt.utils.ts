@@ -2,7 +2,7 @@ import { envConfig } from "@config/env.config";
 import bcrypt from 'bcrypt';
 
 export const hashSyncBcrypt = (text: string) => {
-    return bcrypt.hashSync(text, envConfig.SALT_ROUNDS);
+    return bcrypt.hashSync(text, Number(envConfig.SALT_ROUNDS));
 }
 
 export const compareSyncBcrypt = (text: string, hash: string) => {
