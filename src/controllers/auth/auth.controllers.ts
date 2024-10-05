@@ -4,11 +4,20 @@ import bcrypt from 'bcrypt';
 import { JwtPayload } from "@dto/types/jwt/jwt-payload.dto";
 import jwt from 'jsonwebtoken';
 import { CreateUserDto } from "@dto/types/user/create-user.dto";
+import { LoginDto, loginDtoValidation } from "./dto/login.dto";
+import { RegisterDto, registerDtoValidation } from "./dto/register.dto";
 
 const SALT_ROUNDS = 10;
 
 export const loginController = (req: Request, res: Response) => {
     const { username, password } = req.body;
+
+    const inputDto: LoginDto = {
+        username,
+        password,
+    };
+
+    loginDtoValidation(inputDto);
 
     const user = getUserByName(username);
 
@@ -38,7 +47,16 @@ export const loginController = (req: Request, res: Response) => {
 }
 
 export const registerController = (req: Request, res: Response) => {
-    const { username, email, password } = req.body;
+    const { username, email, password, confirmPassword } = req.body;
+
+    const inputDto: RegisterDto = {
+        name: username,
+        email,
+        password,
+        confirmPassword
+    }
+
+    registerDtoValidation(inputDto);
 
     const user = getUserByEmail(email);
 
@@ -46,13 +64,13 @@ export const registerController = (req: Request, res: Response) => {
         throw new Error('User with email already exists');
     }
 
-    const dto: CreateUserDto = {
+    const createUserDto: CreateUserDto = {
         email,
         name: username,
         password: bcrypt.hashSync(password, SALT_ROUNDS),
     }
 
-    const newUser = createUser(dto);
+    const newUser = createUser(createUserDto);
 
     const payload: JwtPayload = {
         id: newUser.id,
