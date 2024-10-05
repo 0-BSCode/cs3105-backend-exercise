@@ -25,6 +25,7 @@ A simple user management API that allows the following operations:
 ```
 
 3. Set up environment variables in the `.env` file
+
 | **Variable**         | **Description**                                                                                             |
 |----------------------|-------------------------------------------------------------------------------------------------------------|
 | PORT                 | Port that the express app will run on (e.g. `5000`) |
