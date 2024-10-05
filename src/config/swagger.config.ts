@@ -7,12 +7,12 @@ const __dirname = path.dirname(__filename); // get the name of the directory
 
 const jsDocOptions: Options = {
     definition: {
+        openapi: '3.0.0',
         info: {
             title: 'User Management API',
             version: '1.0.0',
             description: 'A simple API for managing users',
         },
-        basePath: '/api',
     },
     apis: [path.join(__dirname, '..', 'routes/*.{js,ts}')],
 };
