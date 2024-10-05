@@ -11,7 +11,7 @@ export const loginInputDtoValidation = (dto: LoginInputDto) => {
         password: Joi.string().required()
     });
 
-    const result = schema.validate(dto, { allowUnknown: false });
+    const result = schema.validate(dto);
 
     if (result.error) {
         throw new Error(result.error.message);
