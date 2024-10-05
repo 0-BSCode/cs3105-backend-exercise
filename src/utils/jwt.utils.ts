@@ -1,4 +1,4 @@
-import { envConfig } from "@config/env"
+import { envConfig } from "@config/env.config"
 import jwt from 'jsonwebtoken'
 
 export const signJwt = (payload: any) => {

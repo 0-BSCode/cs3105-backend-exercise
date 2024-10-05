@@ -1,4 +1,4 @@
-import { envConfig } from "@config/env";
+import { envConfig } from "@config/env.config";
 import bcrypt from 'bcrypt';
 
 export const hashSyncBcrypt = (text: string) => {

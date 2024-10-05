@@ -1,7 +1,7 @@
 import { errorHandlerMiddleware } from "@middleware/error-handler.middleware";
 import express, { urlencoded, json } from "express";
 import cookieParser from 'cookie-parser';
-import { envConfig, checkEnv } from '@config/env';
+import { envConfig, checkEnv } from '@config/env.config';
 import { loggerMiddleware } from "@middleware/logger.middleware";
 import routes from "@routes/index";
 import { rateLimiterMiddleware } from "@middleware/rate-limiter.middleware";
