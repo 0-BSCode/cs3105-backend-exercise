@@ -30,8 +30,3 @@ app.get("/", (req, res) => {
 app.listen(envConfig.PORT, () => {
   console.log(`Server is listening at port ${envConfig.PORT}`);
 });
-
-/**
- * TODO
- * 1. Deploy site
- */
