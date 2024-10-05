@@ -28,7 +28,6 @@ app.listen(envConfig.PORT, () => {
 /**
  * TODO
  * 1. Rate limiting middleware
- * 2. Logging middleware
- * 3. Address TODO's
- * 4. Deploy site
+ * 2. Address TODO's
+ * 3. Deploy site
  */
