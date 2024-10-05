@@ -17,6 +17,11 @@ Clone the project
   git clone "https://github.com/0-BSCode/cs3105-backend-exercise"
 ```
 
+Install dependencies
+```bash
+  npm ci
+```
+
 Set up environment variables in the `.env` file
 | **Variable**         | **Description**                                                                                             |
 |----------------------|-------------------------------------------------------------------------------------------------------------|
